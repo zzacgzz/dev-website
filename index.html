@@ -4,219 +4,88 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alejandro · alejandrocg.dev</title>
-<meta name="description" content="Alejandro — mainframe security, certificates, and whatever I'm building this week.">
+<meta name="description" content="Alejandro — mainframe modernization engineer. z/OSMF, Zowe, RACF, Java on z/OS.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f6f4ef;
-    --surface: #ffffff;
-    --text: #1c1c1a;
-    --muted: #6b6a64;
-    --line: #e2dfd6;
+    --bg: #fbfaf7;
+    --text: #1f1f1d;
+    --muted: #6d6c66;
+    --line: #e4e1d8;
     --accent: #0f7b4a;
     --accent-soft: #e3f2ea;
-    --term-bg: #0d1410;
-    --term-text: #7dffb0;
-    --term-dim: #3f8a5f;
+    --tag-bg: #eeece6;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #111311;
-      --surface: #191c1a;
-      --text: #e8ebe6;
-      --muted: #8f968f;
+      --bg: #121413;
+      --text: #e6e9e4;
+      --muted: #8d948d;
       --line: #2a2f2b;
       --accent: #4ade80;
       --accent-soft: #16261b;
-      --term-bg: #070a08;
+      --tag-bg: #1f2321;
     }
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font: 17px/1.65 "IBM Plex Sans", system-ui, sans-serif;
+    font: 17px/1.7 "IBM Plex Sans", system-ui, sans-serif;
+    border-top: 4px solid var(--accent);
   }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  main { max-width: 640px; margin: 0 auto; padding: 72px 20px 64px; }
   a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-  code, .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
-
-  header { padding: 72px 0 40px; }
-  .hello { font-family: "IBM Plex Mono", monospace; color: var(--accent); font-size: 15px; margin: 0 0 8px; }
-  h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; margin: 0 0 18px; letter-spacing: -0.02em; }
-  .intro { font-size: 19px; color: var(--muted); max-width: 600px; margin: 0; }
-  .intro strong { color: var(--text); font-weight: 500; }
-
-  .term {
-    margin: 36px 0 0;
-    background: var(--term-bg);
-    color: var(--term-text);
-    border-radius: 10px;
-    padding: 18px 20px;
-    font: 14px/1.7 "IBM Plex Mono", monospace;
-    overflow-x: auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,.15);
-  }
-  .term .dim { color: var(--term-dim); }
-  .cursor { display: inline-block; width: 8px; height: 15px; background: var(--term-text); vertical-align: -2px; animation: blink 1.1s steps(1) infinite; }
-  @keyframes blink { 50% { opacity: 0; } }
-
-  section { padding: 44px 0; border-top: 1px solid var(--line); }
-  h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 0 0 22px; font-weight: 600; }
-
-  .project { margin: 0 0 28px; }
-  .project:last-child { margin-bottom: 0; }
-  .project h3 { margin: 0 0 4px; font-size: 20px; }
-  .project p { margin: 0 0 10px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag { font: 12.5px "IBM Plex Mono", monospace; background: var(--accent-soft); color: var(--accent); padding: 3px 9px; border-radius: 99px; }
-
-  .toolbox { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
-  .box { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
-  .box h3 { margin: 0 0 8px; font-size: 16px; }
-  .box ul { margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: 15px; }
-  .box li { padding: 2px 0; }
-  .box li::before { content: "› "; color: var(--accent); }
-
-  .lessons { margin: 0; padding: 0; list-style: none; }
-  .lessons li { padding: 12px 0; border-bottom: 1px dashed var(--line); }
-  .lessons li:last-child { border-bottom: 0; }
-  .lessons .bug { display: block; font-family: "IBM Plex Mono", monospace; font-size: 14px; color: var(--accent); }
-
-  footer { padding: 44px 0 64px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
-  footer .links { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 14px; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0; letter-spacing: -0.01em; }
+  h1 .dot { color: var(--accent); }
+  .sub { font-family: "IBM Plex Mono", monospace; color: var(--accent); font-size: 15px; margin: 6px 0 32px; }
+  h2 { font-size: 18px; margin: 40px 0 12px; }
+  h2::before { content: "# "; color: var(--accent); font-family: "IBM Plex Mono", monospace; }
+  p { margin: 0 0 14px; }
+  strong { color: var(--accent); font-weight: 600; }
+  ul { margin: 0; padding-left: 0; list-style: none; }
+  li { margin: 0 0 12px; padding-left: 20px; position: relative; }
+  li::before { content: "›"; position: absolute; left: 2px; color: var(--accent); font-weight: 600; }
+  li b { font-weight: 600; margin-right: 6px; }
+  .tag { display: inline-block; font: 12.5px/1.5 "IBM Plex Mono", monospace; background: var(--tag-bg); color: var(--text); padding: 1px 8px; border-radius: 99px; margin: 2px 2px 2px 0; }
+  .links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: "IBM Plex Mono", monospace; font-size: 15px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 </style>
 </head>
 <body>
-<div class="wrap">
+<main>
 
-  <header>
-    <p class="hello">// hi, I'm</p>
-    <h1>Alejandro</h1>
-    <p class="intro">
-      I spend most of my time where <strong>mainframes meet modern code</strong> —
-      RACF, certificates, and crypto on z/OS, with Java, Kotlin and React stacked on top.
-      This is where I keep track of what I'm building and what I've figured out along the way.
-    </p>
+  <h1>Alejandro<span class="dot">.</span></h1>
+  <p class="sub">mainframe modernization · z/OS</p>
 
-    <div class="term" aria-label="Decorative terminal">
-<span class="dim">$</span> whoami<br>
-alejandro — z/OS security · full-stack · occasional C++ archaeologist<br>
-<span class="dim">$</span> cat now.txt<br>
-building a native z/OS security library + REST API over it<br>
-<span class="dim">$</span> echo $FAVORITE_ENCODING<br>
-IBM-1047 <span class="dim"># unfortunately</span><br>
-<span class="dim">$</span> <span class="cursor"></span>
-    </div>
-  </header>
+  <p>Hi! I'm a software engineer who works on <strong>mainframe modernization</strong>: taking z/OS
+     applications that have run reliably for decades and opening them up through APIs, open tooling
+     and modern pipelines, without breaking what already works.</p>
 
-  <section id="now">
-    <h2>What I'm building</h2>
+  <p>I'm comfortable on both sides: the REXX, JCL and RACF that run things today, and the z/OSMF,
+     Zowe and Java services that carry them forward.</p>
 
-    <div class="project">
-      <h3>zsec — z/OS security, but with an API</h3>
-      <p>A 64-bit native library that wraps RACF administration and System SSL, called through JNI
-         and exposed as a Spring Boot REST API with RACF-backed logins. The goal: manage mainframe
-         security from anywhere that can speak HTTP.</p>
-      <div class="tags"><span class="tag">C / JNI</span><span class="tag">RACF</span><span class="tag">System SSL</span><span class="tag">Spring Boot</span></div>
-    </div>
+  <h2>What I work with</h2>
+  <ul>
+    <li><b>Modern z/OS</b> <span class="tag">z/OSMF</span><span class="tag">Zowe CLI</span><span class="tag">API Mediation Layer</span><span class="tag">Zowe Explorer</span></li>
+    <li><b>Bridging</b> <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">JNI</span><span class="tag">C/C++</span></li>
+    <li><b>Security</b> <span class="tag">RACF</span><span class="tag">ACF2</span><span class="tag">Top Secret</span><span class="tag">Key rings</span><span class="tag">TLS</span></li>
+    <li><b>Core z/OS</b> <span class="tag">REXX</span><span class="tag">ISPF / DTL</span><span class="tag">JCL</span><span class="tag">STCs</span><span class="tag">USS</span><span class="tag">SDSF</span></li>
+    <li><b>Build &amp; deploy</b> <span class="tag">Git</span><span class="tag">Maven</span><span class="tag">CI/CD</span></li>
+  </ul>
 
-    <div class="project">
-      <h3>Certificate lifecycle, end to end</h3>
-      <p>Discovering, tracking and renewing certificates across mainframe systems — native engines on z/OS,
-         a central Kotlin backend, a React portal with live updates, and ACME integration for issuing.
-         Lately thinking a lot about post-quantum crypto and what CNSA 2.0 means for all of it.</p>
-      <div class="tags"><span class="tag">Kotlin</span><span class="tag">React</span><span class="tag">ACME</span><span class="tag">PKI</span><span class="tag">PQC</span></div>
-    </div>
+  <h2>Links</h2>
+  <div class="links">
+    <a href="www.linkedin.com/in/acg-dev">LinkedIn</a>
+    <a href="mailto:alejandrocg1599@gmail.com">Email</a>
+  </div>
 
-    <div class="project">
-      <h3>Password sync across worlds</h3>
-      <p>A C++ Windows service that keeps passwords in step between Active Directory (across forests)
-         and the mainframe. Lots of COM, ADSI and RACF permission puzzles.</p>
-      <div class="tags"><span class="tag">C++</span><span class="tag">Active Directory</span><span class="tag">z/OS STC</span></div>
-    </div>
+  <footer>© <span id="y">2026</span> Alejandro</footer>
 
-    <div class="project">
-      <h3>This site</h3>
-      <p>Hand-written HTML on GitHub Pages. Took longer to get DNS right than to write it.</p>
-      <div class="tags"><span class="tag">HTML</span><span class="tag">DNS (humbling)</span></div>
-    </div>
-  </section>
-
-  <section id="toolbox">
-    <h2>Toolbox</h2>
-    <div class="toolbox">
-      <div class="box">
-        <h3>Mainframe</h3>
-        <ul>
-          <li>RACF &amp; keyrings</li>
-          <li>ICSF &amp; z/OS PKI</li>
-          <li>AT-TLS</li>
-          <li>R_datalib / R_admin</li>
-          <li>USS, JCL, STCs, REXX</li>
-        </ul>
-      </div>
-      <div class="box">
-        <h3>Backend</h3>
-        <ul>
-          <li>Java &amp; Kotlin</li>
-          <li>Spring Boot</li>
-          <li>Native C via JNI</li>
-          <li>Maven multi-module</li>
-          <li>Python</li>
-        </ul>
-      </div>
-      <div class="box">
-        <h3>Frontend</h3>
-        <ul>
-          <li>React</li>
-          <li>Vite</li>
-          <li>Tailwind</li>
-          <li>Server-sent events</li>
-        </ul>
-      </div>
-      <div class="box">
-        <h3>Windows</h3>
-        <ul>
-          <li>C++ services</li>
-          <li>C# / WPF</li>
-          <li>COM &amp; ADSI</li>
-          <li>Active Directory</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="lessons">
-    <h2>Things I learned the hard way</h2>
-    <ul class="lessons">
-      <li><span class="bug">char[61]</span>One byte too short is enough to make an exception throw the wrong class name. Count your null terminators.</li>
-      <li><span class="bug">UnsatisfiedLinkError</span>Usually not your code. Usually LIBPATH.</li>
-      <li><span class="bug">mkdir XXXXXX</span><code>mktemp</code> doesn't exist on USS, and the X's won't expand themselves.</li>
-      <li><span class="bug">EBCDIC ↔ ASCII</span>Every encoding bug lives exactly on a boundary. Decide where the boundary is and guard it.</li>
-      <li><span class="bug">ftp ascii</span>Binary files go over in binary. Every time. No exceptions.</li>
-    </ul>
-  </section>
-
-  <section id="off">
-    <h2>Off the keyboard</h2>
-    <p style="margin:0">Watching soccer, playing games, and always tinkering with some side idea that's probably
-       a bit too ambitious.</p>
-  </section>
-
-  <footer>
-    <div class="links">
-      <a href="https://github.com/zzacgzz">GitHub</a>
-      <a href="mailto:hello@alejandrocg.dev">Email</a>
-    </div>
-    © <span id="y">2026</span> Alejandro · served from GitHub Pages, not a mainframe (yet)
-  </footer>
-
-</div>
+</main>
 <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
